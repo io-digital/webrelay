@@ -33,6 +33,6 @@ webrelay.setup(config.RELAY_HOST, config.RELAY_MAC, function(err, res) {
 // toggle a breaker
 webrelay.switch(config.RELAY_HOST, 1, 1, function(err, res) {
   if (err) throw err;
-  console.log(res);
+  // breaker number 1's state is now 1
 });
 ```

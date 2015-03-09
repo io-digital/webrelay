@@ -28,8 +28,8 @@ module.exports = (ip, breaker, value, callback) ->
 
   get("http://#{ip}/stateFull.xml?relay#{breaker}State=#{value}&time=", (res) ->
     # console.log("Got response: " + res.statusCode)
-    callback(null, 200)
+    callback(null, true)
   ).on('error', (err) ->
     # console.log("Got error: " + err.message)
-    callback(err, 500)
+    callback(err, null)
   )
