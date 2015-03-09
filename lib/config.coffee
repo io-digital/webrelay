@@ -1,0 +1,13 @@
+
+{RELAY_HOST, RELAY_MAC} = process.env
+
+RELAY_HOST = process.argv[2] ? RELAY_HOST
+RELAY_MAC = process.argv[3] ? RELAY_MAC
+
+RELAY_HOST = RELAY_HOST ? '192.168.88.30'
+RELAY_MAC = RELAY_MAC ? '00:0c:c8:03:13:22'
+
+module.exports =
+
+  RELAY_HOST: RELAY_HOST
+  RELAY_MAC: RELAY_MAC
