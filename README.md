@@ -11,6 +11,11 @@
 
 http wrapper for operating a [ControlByWeb](http://www.controlbyweb.com/) relay device
 
+##### api
+
+`#setup(host, mac, callback)` - add an `arp` entry and test with `ping`
+`#switch(host, breaker, state, callback)` - change the state of `breaker` to `state`
+
 ##### usage
 
 the module is programmed to spy at environment variables and runtime arguments for configuration data. runtime arguments take precedence over environment variables and default values.
