@@ -13,8 +13,8 @@ http wrapper for operating a [ControlByWeb](http://www.controlbyweb.com/) relay 
 
 ##### api
 
-`#setup(host, mac, callback)` - add an `arp` entry and test with `ping`
-`#switch(host, breaker, state, callback)` - change the state of `breaker` to `state`
+- `#setup(host, mac, callback)` add an `arp` entry and test with `ping`
+- `#switch(host, breaker, state, callback)` change the state of `breaker` to `state`
 
 ##### usage
 
