@@ -21,7 +21,14 @@ below is an example of adding an `arp` entry and verifying that the device repli
 var webrelay = require('webrelay'),
     config = webrelay.config;
 
+// initial set up
 webrelay.setup(config.RELAY_HOST, config.RELAY_MAC, function(err, res) {
+  if (err) throw err;
+  // relay is now accessible via config.RELAY_HOST
+});
+
+// toggle a breaker
+webrelay.switch(config.RELAY_HOST, 1, 1, function(err, res) {
   if (err) throw err;
   console.log(res);
 });

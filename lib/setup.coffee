@@ -15,9 +15,9 @@ arp = (ip, mac, fn) ->
 
   arp.on('close', (code) ->
     if code isnt 0
-      fn(code, null)
+      fn(code, {code: code, out: stdout, err: stderr})
     else
-      fn(null, true)
+      fn(null, {code: code, out: stdout, err: stderr})
   )
 
 ping = (ip, fn) ->
@@ -31,23 +31,33 @@ ping = (ip, fn) ->
 
   ping.on('close', (code) ->
     if code is 0
-      fn(null, {transmitted: true, responded: true})
+      fn(null, {code: code, raw: stdout, transmitted: true, responded: true})
     else if code is 2
-      fn(null, {transmitted: true, responded: false})
+      fn(null, {code: code, out: stdout, err: stderr, transmitted: true, responded: false})
     else
-      fn(code, null)
+      fn(code, {code: code, out: stdout, err: stderr, transmitted: false, responded: false})
   )
 
 module.exports = (relayIP, relayMAC, callback) ->
 
-  arp(relayIP, relayMAC, (arpError, res) ->
-    if arpError
-      callback(arpError, null)
-    else
-      ping(relayIP, (pingError, res) ->
-        if pingError
-          callback(pingError, null)
-        else
-          callback(null, true)
-      )
+  errors = arp: null, ping: null
+
+  arp(relayIP, relayMAC, (arpErr, arpRes) ->
+
+    if arpErr
+      errors.arp = arpRes
+      return callback(errors, null)
+
+    ping(relayIP, (pingErr, pingRes) ->
+
+      if pingErr
+        errors.ping = pingRes
+        callback(errors, null)
+      else if pingRes.responded
+        callback(null, true)
+      else
+        errors.ping = pingRes
+        callback(errors, null)
+    )
+
   )
