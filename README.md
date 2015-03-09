@@ -20,8 +20,6 @@ http wrapper for operating a [ControlByWeb](http://www.controlbyweb.com/) relay 
 
 the module is programmed to spy at environment variables and runtime arguments for configuration data. runtime arguments take precedence over environment variables and default values.
 
-below is an example of adding an `arp` entry and verifying that the device replies via a `ping` test.
-
 ```js
 var webrelay = require('webrelay'),
     config = webrelay.config;
