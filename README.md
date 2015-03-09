@@ -18,11 +18,11 @@ the module is programmed to spy at environment variables and runtime arguments f
 below is an example of adding an `arp` entry and verifying that the device replies via a `ping` test.
 
 ```js
-var webrelay = require('webrelay');
-var config = webrelay.config;
+var webrelay = require('webrelay'),
+    config = webrelay.config;
 
-webrelay.setup(config.RELAY_HOST, config.RELAY_MAC, (err, res) ->
+webrelay.setup(config.RELAY_HOST, config.RELAY_MAC, function(err, res) {
   if (err) throw err;
   console.log(res);
-);
+});
 ```
