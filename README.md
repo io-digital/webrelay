@@ -9,7 +9,7 @@
 [![Coverage Status](https://coveralls.io/repos/io-digital/webrelay/badge.svg?branch=master)](https://coveralls.io/r/io-digital/webrelay?branch=master)
 [![Dependency Status](https://david-dm.org/io-digital/webrelay.svg)](https://david-dm.org/io-digital/webrelay)
 
-an http wrapper for operating a controlbyweb relay device.
+http wrapper for operating a controlbyweb relay device
 
 ##### usage
 
