@@ -1,6 +1,6 @@
 {
   "name": "webrelay",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "http wrapper for operating a controlbyweb relay device",
   "main": "lib/index.js",
   "scripts": {
