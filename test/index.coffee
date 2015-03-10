@@ -30,7 +30,6 @@ describe 'webrelay', ->
       it 'should freak out if gibberish is given as a host address (code > 2)', (done) ->
 
         relay.setup.ping('kasdfjs', (err, res) ->
-          expect(err).gt(2)
           expect(res).to.contain.keys(['code', 'out', 'err', 'transmitted', 'responded'])
           expect(res.code).gt(2)
           expect(res.transmitted).to.equal(false)
