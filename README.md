@@ -23,17 +23,24 @@ the module is programmed to spy at environment variables and runtime arguments f
 
 ```js
 var webrelay = require('webrelay'),
-    config = webrelay.config;
+    host = webrelay.config.RELAY_HOST,
+    mac = webrelay.config.RELAY_MAC;
 
 // initial set up
-webrelay.setup(config.RELAY_HOST, config.RELAY_MAC, function(err, res) {
+webrelay.setup(host, mac, function(err, res) {
   if (err) throw err;
   // relay is now accessible via config.RELAY_HOST
 });
 
 // toggle a breaker
-webrelay.switch(config.RELAY_HOST, 1, 1, function(err, res) {
+webrelay.switch(host, 1, 1, function(err, res) {
   if (err) throw err;
   // breaker number 1's state is now 1
+});
+
+// get the state back (in xml)
+webrelay.state(host, function(err, res) {
+  if (err) throw err;
+  console.log(res);
 });
 ```
