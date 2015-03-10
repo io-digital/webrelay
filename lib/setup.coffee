@@ -33,7 +33,7 @@ exports.ping = (ip, fn) ->
 
     if code is 0
       fn(null, {code: code, out: stdout, err: stderr, transmitted: true, responded: true})
-    else if code is 2
+    else if code is 2 or code is 68
       fn(null, {code: code, out: stdout, err: stderr, transmitted: true, responded: false})
     else
       fn(code, {code: code, out: stdout, err: stderr, transmitted: false, responded: false})
