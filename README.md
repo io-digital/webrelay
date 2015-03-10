@@ -6,7 +6,7 @@
 [![Build Status](https://travis-ci.org/io-digital/webrelay.svg)](https://travis-ci.org/io-digital/webrelay)
 [![devDependency Status](https://david-dm.org/io-digital/webrelay/dev-status.svg)](https://david-dm.org/io-digital/webrelay#info=devDependencies)
 
-[![Coverage Status](https://coveralls.io/repos/io-digital/webrelay/badge.svg?branch=master)](https://coveralls.io/r/io-digital/webrelay?branch=master)
+[![Coverage Status](https://coveralls.io/repos/io-digital/webrelay/badge.svg)](https://coveralls.io/r/io-digital/webrelay)
 [![Dependency Status](https://david-dm.org/io-digital/webrelay.svg)](https://david-dm.org/io-digital/webrelay)
 
 http wrapper for operating a [ControlByWeb](http://www.controlbyweb.com/) relay device
