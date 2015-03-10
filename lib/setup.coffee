@@ -5,9 +5,6 @@ exports.arp = (ip, mac, fn) ->
 
   stdout = stderr = ''
 
-  # default ip '192.168.88.30'
-  # default mac '00:0c:c8:03:13:22'
-
   arp = spawn('arp', ['-s', ip, mac])
 
   arp.stdout.on('data', (data) -> stdout += data.toString())
