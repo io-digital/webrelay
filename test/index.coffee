@@ -8,13 +8,22 @@ describe 'webrelay', ->
 
   @timeout(60000)
 
-  it 'should export config, setup, state and switch', ->
+  describe 'module', ->
 
-    expect(relay).to.contain.keys(['config', 'setup', 'state', 'switch'])
+    it 'should export config, setup, state and switch', ->
 
-  describe 'setup', ->
+      expect(relay).to.contain.keys(['config', 'setup', 'state', 'switch'])
+
+  describe '#setup', ->
 
     describe '#ping', ->
+
+      it 'should respond with an object containing specific keys', (done) ->
+
+        relay.setup.ping('127.0.0.1', (err, res) ->
+          expect(res).to.contain.keys(['code', 'out', 'err', 'transmitted', 'responded'])
+          done()
+        )
 
       it 'should exit cleanly for a real host (code 0)', (done) ->
 
@@ -37,4 +46,18 @@ describe 'webrelay', ->
           done()
         )
 
+    describe '#arp', ->
 
+      it 'should respond with an object containing specific keys', (done) ->
+
+        relay.setup.arp('lajsfdls', 'lkajsdfljs', (err, res) ->
+          expect(res).to.contain.keys(['code', 'out', 'err'])
+          done()
+        )
+
+      it 'should not exit cleanly if it is given gibberish', (done) ->
+
+        relay.setup.arp('lajsfdls', 'lkajsdfljs', (err, res) ->
+          expect(err).gt(0)
+          done()
+        )
