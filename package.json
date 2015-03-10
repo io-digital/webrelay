@@ -4,7 +4,7 @@
   "description": "http wrapper for operating a controlbyweb relay device",
   "main": "lib/index.js",
   "scripts": {
-    "test": "RELAY_MAC=testing RELAY_HOST=testing mocha",
+    "test": "mocha",
     "coveralls": "npm run build && istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage && npm run clean",
     "lint": "node_modules/.bin/coffeelint lib/*.coffee",
     "build": "mv lib src && coffee --no-header -o lib -c src",

@@ -24,7 +24,7 @@ exports.ping = (ip, fn) ->
 
   stdout = stderr = ''
 
-  ping = spawn('ping', ['-c', '3', '-s', '102', '-t', '3', '-o', ip])
+  ping = spawn('ping', ['-c', '2', '-s', '102', ip])
 
   ping.stdout.on('data', (data) -> stdout += data.toString())
   ping.stderr.on('data', (data) -> stderr += data.toString())
