@@ -27,7 +27,7 @@ describe 'webrelay', ->
 
       it 'should transmit to loopback and get a response (code 0)', (done) ->
 
-        relay.setup.ping('localhost', (err, res) ->
+        relay.setup.ping('::1', (err, res) ->
           expect(err).to.equal(null)
           expect(res).to.contain.keys(['code', 'out', 'err', 'transmitted', 'responded'])
           expect(res.code).to.equal(0)
