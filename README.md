@@ -14,7 +14,8 @@ http wrapper for operating a [ControlByWeb](http://www.controlbyweb.com/) relay 
 ##### api
 
 - `#setup(host, mac, callback)` add an `arp` entry and test with `ping`
-- `#switch(host, breaker, state, callback)` change the state of `breaker` to `state`
+- `#switch(host, breaker, state, callback)` change the state of `breaker` to `state` and return the state of the relay (xml)
+- `#state(host, callback)` return the state of the relay (xml)
 
 ##### usage
 
