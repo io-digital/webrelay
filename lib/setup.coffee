@@ -1,7 +1,7 @@
 
 {spawn} = require('child_process')
 
-arp = (ip, mac, fn) ->
+exports.arp = (ip, mac, fn) ->
 
   stdout = stderr = ''
 
@@ -20,35 +20,36 @@ arp = (ip, mac, fn) ->
       fn(null, {code: code, out: stdout, err: stderr})
   )
 
-ping = (ip, fn) ->
+exports.ping = (ip, fn) ->
 
   stdout = stderr = ''
 
-  ping = spawn('ping', ['-c', '1', '-s', '102', '-o', ip])
+  ping = spawn('ping', ['-c', '3', '-s', '102', '-t', '3', '-o', ip])
 
   ping.stdout.on('data', (data) -> stdout += data.toString())
   ping.stderr.on('data', (data) -> stderr += data.toString())
 
   ping.on('close', (code) ->
+
     if code is 0
-      fn(null, {code: code, raw: stdout, transmitted: true, responded: true})
+      fn(null, {code: code, out: stdout, err: stderr, transmitted: true, responded: true})
     else if code is 2
       fn(null, {code: code, out: stdout, err: stderr, transmitted: true, responded: false})
     else
       fn(code, {code: code, out: stdout, err: stderr, transmitted: false, responded: false})
   )
 
-module.exports = (relayIP, relayMAC, callback) ->
+exports.run = (relayIP, relayMAC, callback) ->
 
   errors = arp: null, ping: null
 
-  arp(relayIP, relayMAC, (arpErr, arpRes) ->
+  @arp(relayIP, relayMAC, (arpErr, arpRes) =>
 
     if arpErr
       errors.arp = arpRes
       return callback(errors, null)
 
-    ping(relayIP, (pingErr, pingRes) ->
+    @ping(relayIP, (pingErr, pingRes) ->
 
       if pingErr
         errors.ping = pingRes

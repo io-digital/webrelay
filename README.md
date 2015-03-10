@@ -13,7 +13,9 @@ http wrapper for operating a [ControlByWeb](http://www.controlbyweb.com/) relay 
 
 ##### api
 
-- `#setup(host, mac, callback)` add an `arp` entry and test with `ping`
+- `#setup.run(host, mac, callback)` add an `arp` entry for `host` and test with `ping`
+- `#setup.arp(host, mac, callback)` add an `arp` entry for `host`
+- `#setup.ping(host, callback)` ping the given `host`
 - `#switch(host, breaker, state, callback)` change the state of `breaker` to `state` and return the state of the relay (xml)
 - `#state(host, callback)` return the state of the relay (xml)
 
@@ -27,7 +29,7 @@ var webrelay = require('webrelay'),
     mac = webrelay.config.RELAY_MAC;
 
 // initial set up
-webrelay.setup(host, mac, function(err, res) {
+webrelay.setup.run(host, mac, function(err, res) {
   if (err) throw err;
   // relay is now accessible via config.RELAY_HOST
 });
