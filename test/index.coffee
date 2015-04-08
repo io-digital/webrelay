@@ -61,3 +61,21 @@ describe 'webrelay', ->
           expect(err).gt(0)
           done()
         )
+
+  describe '#state', ->
+
+    it 'should respond with an error if the webrelay cannot be reached', (done) ->
+
+      relay.state('localhost', (err, res) ->
+        expect(res).to.not.be.ok
+        done()
+      )
+
+  describe '#switch', ->
+
+    it 'should respond with an error if the webrelay cannot be reached', (done) ->
+
+      relay.switch('localhost', 0, 0, (err, res) ->
+        expect(res).to.not.be.ok
+        done()
+      )

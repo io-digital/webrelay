@@ -1,7 +1,7 @@
 
 {spawn} = require('child_process')
 
-exports.arp = (ip, mac, fn) ->
+exports.arp = (ip, mac, callback) ->
 
   stdout = stderr = ''
 
@@ -12,12 +12,24 @@ exports.arp = (ip, mac, fn) ->
 
   arp.on('close', (code) ->
     if code isnt 0
-      fn(code, {code: code, out: stdout, err: stderr})
+      process.nextTick( ->
+        callback(code, {
+          code: code,
+          out: stdout,
+          err: stderr
+        })
+      )
     else
-      fn(null, {code: code, out: stdout, err: stderr})
+      process.nextTick( ->
+        callback(null, {
+          code: code,
+          out: stdout,
+          err: stderr
+        })
+      )
   )
 
-exports.ping = (ip, fn) ->
+exports.ping = (ip, callback) ->
 
   stdout = stderr = ''
 
@@ -29,16 +41,40 @@ exports.ping = (ip, fn) ->
   ping.on('close', (code) ->
 
     if code is 0
-      fn(null, {code: code, out: stdout, err: stderr, transmitted: true, responded: true})
+      process.nextTick( ->
+        callback(null, {
+          code: code,
+          out: stdout,
+          err: stderr,
+          transmitted: true,
+          responded: true
+        })
+      )
     else if code is 2 or code is 68
-      fn(null, {code: code, out: stdout, err: stderr, transmitted: true, responded: false})
+      process.nextTick( ->
+        callback(null, {
+          code: code,
+          out: stdout,
+          err: stderr,
+          transmitted: true,
+          responded: false
+        })
+      )
     else
-      fn(code, {code: code, out: stdout, err: stderr, transmitted: false, responded: false})
+      process.nextTick( ->
+        callback(code, {
+          code: code,
+          out: stdout,
+          err: stderr,
+          transmitted: false,
+          responded: false
+        })
+      )
   )
 
 exports.run = (relayIP, relayMAC, callback) ->
 
-  errors = arp: null, ping: null
+  errors = {arp: null, ping: null}
 
   @arp(relayIP, relayMAC, (arpErr, arpRes) =>
 

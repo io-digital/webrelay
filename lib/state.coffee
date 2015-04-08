@@ -6,7 +6,9 @@ module.exports = (ip, callback) ->
   get("http://#{ip}/stateFull.xml", (res) ->
     received = ''
     res.on('data', (data) -> received += data.toString())
-    res.on('end', -> callback(null, received))
+    res.on('end', ->
+      process.nextTick( -> callback(null, received))
+    )
   ).on('error', (err) ->
-    callback(err, null)
+    process.nextTick( -> callback(err, null))
   )
